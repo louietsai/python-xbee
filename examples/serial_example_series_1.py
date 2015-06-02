@@ -1,6 +1,6 @@
 #! /usr/bin/python
 
-from xbee import XBee
+from xbee import XBee, ZigBee
 import serial
 
 """
@@ -19,10 +19,12 @@ def main():
     try:
         
         # Open serial port
-        ser = serial.Serial('/dev/ttyUSB0', 9600)
+        ser0 = serial.Serial('/dev/ttyUSB0', 9600)
+        ser1 = serial.Serial('/dev/ttyUSB1', 9600)
         
         # Create XBee Series 1 object
-        xbee = XBee(ser)
+        #xbee = XBee(ser)
+	xbee = ZigBee(ser1, escaped=True)
         
         
         # Send AT packet
@@ -55,7 +57,8 @@ def main():
     except KeyboardInterrupt:
         pass
     finally:
-        ser.close()
+        ser0.close()
+        ser1.close()
     
 if __name__ == '__main__':
     main()

@@ -10,7 +10,7 @@ This example continuously reads the serial port and processes IO data
 received from a remote XBee.
 """
 
-from xbee import XBee
+from xbee import XBee, ZigBee
 import serial
 
 PORT = '/dev/ttyUSB0'
@@ -20,7 +20,8 @@ BAUD_RATE = 9600
 ser = serial.Serial(PORT, BAUD_RATE)
 
 # Create API object
-xbee = XBee(ser)
+#xbee = XBee(ser)
+xbee = ZigBee(ser, escaped=True)
 
 # Continuously read and print packets
 while True:
